@@ -1,44 +1,42 @@
 import Order from "../Models/OrderModel.js";
 import Products from "../Models/ProductModel.js";
 import expressAsyncHandler from "express-async-handler";
-import { Orders } from "../Data.js";
 
 
 //desc: create new order
-//route: POST /api/shop/orders
+//route: POST /api/orders
 //acess: Private
 
 const createOrder = expressAsyncHandler(async (req, res) => {
-    const { orderItems, subTotalPrice, totalPrice } = req.body;
-    const delivery = {subTotalPrice, totalPrice}; // had to do this for validation
+    try{
+        const { orderItems, subTotalPrice, totalPrice } = req.body;
+        // const delivery = {subTotalPrice, totalPrice}; // had to do this for validation
 
-    // Create the order with the correct structure for delivery
-    const order = new Order({
-        orderItems,
-        delivery,
-        user: req.user._id
-    });
+        console.log("🟡 Received order data:", req.body); // Debugging log
+        // Create the order with the correct structure for delivery
+        const order = new Order({
+            orderItems,
+            subTotalPrice,
+            totalPrice,
+            user: req.user._id
+        });
+        // Reduce stock of products ordered
+        for (const item of orderItems) {
+            const product = await Products.findById(item.product);
+            product.stock = product.stock - item.qty;
+            await product.save();
+        }
+        const createdOrder = await order.save();
 
-    // const validationError = order.validateSync();
-    // if (validationError) {
-    //     console.log(validationError);  // Log detailed validation error
-    //     return res.status(400).json({ message: validationError.message });
-    // }
-
-    // Reduce stock of products ordered
-    for (const item of orderItems) {
-        const product = await Products.findById(item.product);
-        product.stock = product.stock - item.qty;
-        await product.save();
+        res.status(201).json(createdOrder); // Send to client side
+        } catch(error){
+        res.status(400).json({'message': error.message});
     }
-
-    const createdOrder = await order.save();
-    res.status(201).json(createdOrder); // Send to client side
 });
 
 
 //desc: get user order
-//route: GET /api/shop/orders
+//route: GET /api/orders
 //acess: Private
 
 const getUserOrders = expressAsyncHandler(async(req, res)=>{
@@ -77,7 +75,7 @@ const getUserOrders = expressAsyncHandler(async(req, res)=>{
 
 
 //desc: delete user order
-//route: DELETE /api/shop/orders/:id
+//route: DELETE /api/orders/:id
 //acess: Private
 
 const deleteOrder = expressAsyncHandler(async(req, res)=>{
@@ -92,23 +90,28 @@ const deleteOrder = expressAsyncHandler(async(req, res)=>{
 
 
 //desc: get order by id
-//route: GET /api/shop/orders/:id
+//route: GET /api/orders/:id
 //acess: Private
 
 const getOrderById = expressAsyncHandler(async(req, res)=>{
-    const order= await Order.findById(req.params.id).populate('user',
-         'fullName email phone');
-
+    try{
+        const order= await Order.findById(req.params.id).populate(
+            'user',
+            'fullName email phone'
+        );
          if(order){
             res.json(order)
          } else{
             res.status(404).json({message: "Order not found"});
          }
+    } catch(error){
+        res.status(400).json({ message: error.message });
+    }
 });
 
 
 //desc: delete all orders(user dashboard)
-//route: GET /api/shop/orders
+//route: GET /api/orders
 //acess: Private
 
 const deleteAllOrders = expressAsyncHandler(async(req, res)=>{
@@ -120,6 +123,33 @@ const deleteAllOrders = expressAsyncHandler(async(req, res)=>{
 });
 
 
+//desc: update order to paid
+// from stripe
+//@access; Private
+
+// const updateOrderToPaid = expressAsyncHandler(async(req, res)=>{
+//     //find order
+//     const order = await Order.findById(customer?.metadata?.orderId);
+
+//     //if order exists, update payment status to completed and save shipping address
+//     if(order){
+//         order.payments.status = data?.payment_status === 'paid' ? 'completed' : data?.payment_status === 'cancelled' ? 'cancelled' : 'pending';
+//         order.payments.paymentMethod = 'Stripe'
+//         order.payments.paymentDate = Date.now();
+//         order.totalPrice = data?.amount_total / 100;
+//         order.subTotalPrice = data?.amount_subtotal / 100;
+//         order.shippingAddress = {
+//             address: `Line 1: ${customer?.metadata?.address?.line1}, Line 2: ${customer?.metadata?.address?.line2}, Postal Code: ${data?.shipping?.address?.postalCode}, State: ${data?.shipping?.address?.state}, City: ${data?.shipping?.address?.city}`,
+//             city: customer?.metadata?.city,
+//             postalCode: customer?.metadata?.postalCode,
+//             country: customer?.metadata?.country,
+//             fullName: data?.customer_details?.name,
+//             email: customer?.metadata?.email
+//         };
+//         //save the order
+//         await order.save();
+//     };
+// });
 
 
 export {createOrder, getUserOrders,getOrderById, deleteOrder, deleteAllOrders};

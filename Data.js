@@ -19,7 +19,7 @@ export const users = [
 export const categories = [
     {
         name: `Women's Fashion`,
-        image: 'https://res.cloudinary.com/dcqjcnz6u/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1724944716/women-over-40-fashion-trends-d2line-1024x683_vvr4fa.png'
+        image: 'https://res.cloudinary.com/dcqjcnz6u/image/upload/v1738581966/dress_ehnrbn.png'
     },
     {
         name: `Women's Footwear`,
