@@ -24,7 +24,10 @@ const OrderSchema = new mongoose.Schema({
         shippingAddress: {
             fullName: { type: String },
             address: { type: String },
-            email: { type: String, trim: true, lowercase: true },
+            email: {
+                type: String,
+                trim: true,
+                lowercase: true },
             location: { type: String },
             phoneNumber: { type: String},
             shippingMethod: { type: String },
@@ -37,9 +40,12 @@ const OrderSchema = new mongoose.Schema({
         },
         delivery:{
             status: { type: String, default: 'awaiting', required: true },
-            subTotalPrice: { type: Number, required: true },
-            taxPrice: { type: Number, required: true, default: 0.0 },
-        }
+            deliveryDate: { type: Date},
+            deliveryMethod: { type: String },
+        },
+        subTotalPrice: {type: Number, required: true},
+        totalPrice: {type: Number, required: true},
+        taxprice: {type: Number, required: true, default: 0.0}
 },
    {
     timestamps: true
