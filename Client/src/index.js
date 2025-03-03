@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import './index.css';
+import './index.css';  //the styling
 import App from './App.js';
 import reportWebVitals from './reportWebVitals.js';
 import 'swiper/css';
@@ -15,13 +15,11 @@ import {store} from './Redux/Store.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <Provider store={store}>
      <BrowserRouter>
         <App/>
      </BrowserRouter>
     </Provider>
-  </React.StrictMode>
 );
 
 reportWebVitals();
