@@ -69,7 +69,7 @@ function Dashboard() {
         <SideBar>
             {
                 loading ? (
-                    <div className="flex-col flex h-96">
+                    <div className="flex-col justify-center items-center flex h-96">
                         <Loader/>
                     </div>
                 ) :
