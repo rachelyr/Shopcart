@@ -4,7 +4,7 @@ import { BsShareFill} from 'react-icons/bs';
 import Titles from '../../Components/Titles';
 import { TbListDetails } from 'react-icons/tb';
 import Products from '../../Components/Products';
-import ShareMovieModal from '../../Components/Modals/ShareMovieModal' //yet to be coded
+// import ShareMovieModal from '../../Components/Modals/ShareMovieModal' //yet to be coded
 import {toast, Toaster} from 'react-hot-toast';
 import { ColorRadio, ProductImages, QuantityRadio, SizeRadio } from '../../Components/DetailRadio';
 import { useParams} from 'react-router-dom';
@@ -61,13 +61,13 @@ function ProductDetails() {
     return(
         <Layout header={true}>
             <div><Toaster/></div>
-            {modalOpen && (
+            {/* {modalOpen && (
                 <ShareMovieModal
                 modalOpen={modalOpen}
                 setModalOpen = {setModalOpen}
                 card={product}
                 />
-            )}
+            )} */}
 
             {
                 loading ? (

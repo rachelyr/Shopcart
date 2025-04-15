@@ -5,7 +5,7 @@ import { FaRegListAlt } from "react-icons/fa";
 import { ImCancelCircle } from 'react-icons/im';
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { MdOutlineDownloading } from 'react-icons/md';
-import Promos from '../../../Components/Promos';
+// import Promos from '../../../Components/Promos';
 import { Empty } from '../../../Components/Notifications/Error';
 import { useDispatch, useSelector } from "react-redux";
 import {Loader} from '../../../Components/Notifications/Loader'

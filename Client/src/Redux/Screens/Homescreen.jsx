@@ -3,7 +3,6 @@ import Banner from "../../Components/Home/Banner";
 import Categories from '../../Components/Home/Categories';
 import FlashDeal from '../../Components/Home/FlashDeal';
 import PopularProducts from '../../Components/Home/PopularProducts'
-import Promos from '../../Components/Promos';
 import Layout from '../../layout/Layout';
 import {useDispatch, useSelector} from 'react-redux';
 import { getAllProductsAction} from "../Actions/ProductAction";
@@ -48,9 +47,9 @@ function HomeScreen(){
             <div className="min-h-screen container mx-auto xl:px-32 px-4 my-6">
                 <Categories categories={categories} loading={loading}/>
                 <PopularProducts datas={products} loading={loadingProducts}/>
-                <div className="mb-20">
+                {/* <div className="mb-20">
                     <Promos/>
-                </div>
+                </div> */}
                     <FlashDeal
                         datas={offers} loading={loadingProducts} />
             </div>

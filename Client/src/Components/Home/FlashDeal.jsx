@@ -5,7 +5,7 @@ import {FaShareAlt} from 'react-icons/fa';
 import {BsCaretLeftFill, BsCaretRightFill, BsFillEyeFill} from 'react-icons/bs';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation, Autoplay} from 'swiper/modules';
-import ShareMovieModal from "../Modals/ShareMovieModal";  //need to be created
+// import ShareMovieModal from "../Modals/ShareMovieModal";  //need to be created
 import { useNavigate } from "react-router-dom";
 import {OfferLoader} from "../Notifications/Loader";
 
@@ -45,13 +45,13 @@ function FlashDeal({datas, loading}){
 
     return (
         <>
-          {modalOpen && (
+          {/* {modalOpen && (
             <ShareMovieModal
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}
             card={card}
             />
-          )}
+          )} */}
           <div className="my-12">
             <Titles title='Flash Deal' Icon={MdLocalOffer}/>
             <div className="mt-10">

@@ -42,8 +42,7 @@ function Registration() {
     };
 
     const handleSubmitRegistration= (data) => {
-        console.log('register')
-       // console.log(data)
+        console.log('im the sign up handler')
         dispatch(registerAction(data));
         reset();
     };
@@ -56,7 +55,7 @@ useEffect(() => {
     }
     //logged in user is redirected to the home page
     if(userInfo){
-        navigate(redirect)
+        navigate(redirect);
     }
 }, [dispatch, error, userInfo, redirect, navigate, regError]);
 
@@ -75,7 +74,7 @@ useEffect(() => {
                           className="sm:w-2/2 w-3/5 mx-auto"
                         />
                           <p className="text-sm my-3 leading-6 text-center font-semibold">
-                            {!login  //based on wether its the login page or not the p will be outputed
+                            {!login 
                             ? 'Welcome Back to Shopcart, We have a wide range of products. We offer the best prices for great quality Products right to your doorstep!'
                             : 'Welcome to Shopcart, We have a wide range of products. We offer the best prices for great quality Products right to your doorstep!'}
                           </p>
@@ -96,56 +95,75 @@ useEffect(() => {
                         <p className="text-sm text-center my-4 text-gray-200 font-light">
                             {login ? 'Welcome back! Please Login to your account' : 'Create your account'}
                         </p>
-                        <form onSubmit={handleSubmit(login ? handleSubmitLogin : handleSubmitRegistration)} className="flex flex-col gap-5 w-full">
+                        <div className="flex flex-col gap-5 w-full">
                             {!login && (
                                 <>
-                                 <Input
-                                  name= 'fullName'
-                                  {...register('fullName')}
-                                  errors= {errors.fullName}
-                                  type="text"
-                                  placeholder="Full Name"
-                                 />
+                                <div className="flex flex-col">
                                   <Input
-                                  name= 'phone'
-                                  {...register('phone')}
-                                  errors={errors.phone}
-                                  type='number'
-                                  placeholder="Phone Number"
+                                    name= 'fullName'
+                                    {...register('fullName')}
+                                    errors= {errors.fullName}
+                                    type="text"
+                                    placeholder="Full Name"
                                   />
+                                  {errors.fullName && (
+                                      <span className="text-xs text-red-800 pt-1">{errors.fullName.message}</span>
+                                  )}
+                                </div>
+                                <div className="flex flex-col">
+                                  <Input
+                                    name= 'phone'
+                                    {...register('phone')}
+                                    errors={errors.phone}
+                                    type='number'
+                                    placeholder="Phone Number"
+                                  />
+                                  {errors.phone && (
+                                      <span className="text-xs text-red-800 pt-1">{errors.phone.message}</span>
+                                  )}
+                                </div>
                                 </>
                             )}
-                                  <Input
+                                <div className="flex flex-col">
+                                <Input
                                   name='email'
                                   {...register('email')}
                                   errors={errors.email}
                                   type='email'
                                   placeholder="Email"
                                   />
-                                  <Input
-                                  name='password'
-                                  {...register('password')}
-                                  errors={errors.password}
-                                  type='password'
-                                  placeholder="Password"
-                                  />
+                                  {errors.email && (
+                                      <span className="text-xs text-red-800 pt-1">{errors.email.message}</span>
+                                  )}
+                                </div>
+                                <div className="flex flex-col">
+                                    <Input
+                                          name='password'
+                                          {...register('password')}
+                                          errors={errors.password}
+                                          type='password'
+                                          placeholder="Password"
+                                    />
+                                    {errors.password && (
+                                      <span className="text-xs text-red-800 pt-1">{errors.password.message}</span>
+                                  )}
+                                </div>
                          <button
                          disabled= {loading || regLoading}
-                         type="submit"
+                         onClick={handleSubmit(login ? handleSubmitLogin : handleSubmitRegistration)}
                          className="bg-black flex flex-row justify-center gap-4 text-white text-sm font-semibold py-4"
                         >
                             { loading || regLoading
                             ?(
                                 <BiLoaderCircle className='animate-spin text-white' />
-                            )
-                            :(
+                            ) : (
                             <>
                               {login ? 'LOGIN' : 'SIGN UP'}
                               <BiLogInCircle className="w-5 h-5"/>
                             </>
                             )}
                           </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
               </div>

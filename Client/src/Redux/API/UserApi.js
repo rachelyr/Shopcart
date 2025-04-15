@@ -23,10 +23,9 @@ const registerService = async (user) => {
     const {data} = await axios.post('http://localhost:5000/api/users', user);
     if (data){
         localStorage.setItem('userInfo', JSON.stringify(data));
-    } else {
-        return data;
     }
-}
+    return data;
+};
 
 //PRIVATE APIS
 
