@@ -54,7 +54,7 @@ function Banner() {
                               onChange={(e) => setSearch(e.target.value)}
                               type="text"
                               placeholder="Search clothing, laptops, smartphones and more..."
-                              className="w-11/12 px-4 py-2 border-none outline-none text-sm"
+                              className="w-11/12 px-4 py-2 border-none outline-none text-sm focus:outline-none focus:ring-0 focus-border-gray-700"
                               />
                                 <button
                                   type='submit'

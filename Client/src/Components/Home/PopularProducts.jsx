@@ -15,7 +15,7 @@ function PopularProducts({datas, loading}) {
             data-aos-offset="200"
             data-aos-delay="10"
             data-aos-duration="1000"
-            className="grid sm:mt-10 mt-6 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+            className="grid sm:mt-10 mt-6 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 grid-cols-2 gap-4">
                 {
                 loading || Product?.length ===0
                 ? Array.from(Array(6).keys()).map((p, i) =>(

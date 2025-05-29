@@ -81,12 +81,16 @@ const SidebarFilter = ({ category }) => {
 
   //load more
   const HandleLoadMore = (value) => {
-    if (value === "next") {
+    if (value === "Next") {
       setPageNumber((prev) => prev + 1);
     } else {
       setPageNumber((prev) => prev - 1);
     }
-  };
+
+    window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })};
 
   //clear filters
   const clearFilters = (states) => {
@@ -148,18 +152,18 @@ const SidebarFilter = ({ category }) => {
           </div>
 
           {pages > 1 && (
-            <div className="w-full flex-rows gap-4 my-12">
+            <div className="w-full flex flex-row justify-center gap-4 my-12">
               <button
                 disabled={page === 1}
-                onClick={() => HandleLoadMore("prev")}
-                className="flex-rows disabled:bg-opacity-70 gap-3 text-white py-3 px-4 text-xs rounded font-semibold bg-main"
+                onClick={() => HandleLoadMore("Prev")}
+                className="flex-row disabled:bg-opacity-70 gap-3 text-white py-4 px-5 text-sm rounded font-semibold bg-main"
               >
                 Prev
               </button>
               <button
                 disabled={pages && pages === page}
-                onClick={() => HandleLoadMore("next")}
-                className="flex-rows gap-3 disabled:bg-opacity-70 text-white py-3 px-4 text-xs rounded font-semibold bg-main"
+                onClick={() => HandleLoadMore("Next")}
+                className="flex-row gap-3 disabled:bg-opacity-70 text-white py-4 px-5 text-sm rounded font-semibold bg-main"
               >
                 Next
               </button>

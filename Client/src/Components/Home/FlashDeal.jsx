@@ -45,13 +45,6 @@ function FlashDeal({datas, loading}){
 
     return (
         <>
-          {/* {modalOpen && (
-            <ShareMovieModal
-            modalOpen={modalOpen}
-            setModalOpen={setModalOpen}
-            card={card}
-            />
-          )} */}
           <div className="my-12">
             <Titles title='Flash Deal' Icon={MdLocalOffer}/>
             <div className="mt-10">
@@ -95,8 +88,8 @@ function FlashDeal({datas, loading}){
 
                     datas?.map((f) =>(
                         <SwiperSlide key={f?._id}>
-                            <div className="rounded-lg z-10 group hover:shadow-lg transitions overflow-hidden relative">
-                                <div>
+                            <div className="rounded-lg z-10 group hover:shadow-lg transitions block relative">
+                                <div className={"w-full h-64 md:h-82 overflow-hidden rounded-lg"}>
                                     <img
                                     alt={f?.title}
                                     src={
@@ -106,7 +99,7 @@ function FlashDeal({datas, loading}){
                                         }
                                     onClick={() => navigate(`/card/${f?._id}`)
                                     }
-                                    className="w-full transitions h-full object-cover"
+                                    className="w-full h-full transitions object-contain"
                                     />
                                     <div className="absolute top-3 text-xs py-1 px-3 font-bold left-3 bg-flash rounded">
                                         {f?.salesOffer?.discount}% OFF
