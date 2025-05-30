@@ -81,17 +81,17 @@ const Navbar = () => {
                             value={search}
                             type="text"
                             placeholder="Search dresses, skirts, tops, jewellery.."
-                            className="font-semibold text-xs md:text-sm w-11/12 bg-transparent border-none px-2 text-gray-900"/>
+                            className="font-semibold text-xs md:text-sm w-11/12 bg-transparent border-none px-2 text-gray-900 focus:outline-none focus:ring-0 focus:border-gray-700"/>
                   </form>
                 </div>
                 <div className="col-span-3 font-bold hidden xl:gap-14 2xl:gap-20 justify-between lg:flex xl:justify-end">
                   <NavLink to={'/shop'} className={Hover}>
                     Shop
                   </NavLink>
-                  <NavLink to={'/about-us'} className={Hover}>
+                  <NavLink to={'/'} className="hover:text-main">
                     About Us
                   </NavLink>
-                  <NavLink to={'/contact-us'} className={Hover}>
+                  <NavLink to={'/'} className="hover:text-main">
                     Contact Us
                   </NavLink>
                   <NavLink to={'/dashboard'} className={Hover}>
