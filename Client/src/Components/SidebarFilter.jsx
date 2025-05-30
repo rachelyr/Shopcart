@@ -60,7 +60,6 @@ const SidebarFilter = ({ category }) => {
 
   // get all products
   useEffect(() => {
-    console.log("🚀 Dispatching getAllProductsAction with:", { ...queries, pageNumber });
     dispatch(getAllProductsAction({ ...queries, pageNumber: pageNumber }));
   }, [dispatch, pageNumber, queries]);
 

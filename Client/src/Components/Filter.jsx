@@ -46,8 +46,6 @@ export default function Filter ({button, states, functions, categories, tags}){
         },
     ];
 
-    console.log('datas: ', datas);
-
     //active
     const active = (name) =>{
         if (name === 'Published'){
