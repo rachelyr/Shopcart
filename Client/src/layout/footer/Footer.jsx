@@ -10,19 +10,19 @@ function Footer() {
             title: 'Shopcart',
             links: [
                 {
-                    link: '/about-us',
+                    link: '/',
                     name: 'About Us'
                 },
                 {
-                    link: '/faq',
+                    link: '/',
                     name: 'FAQ'
                 },
                 {
-                    link: '/policy',
+                    link: '/',
                     name: 'Policy'
                 },
                 {
-                    link: '/terms-condition',
+                    link: '/',
                     name: 'Terms and Conditions'
                 },
             ],
