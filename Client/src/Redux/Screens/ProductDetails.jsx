@@ -61,6 +61,8 @@ function ProductDetails() {
                 _id: firstColor._id,
                 images: firstColor.image || []
             })
+        }else {
+            setColors({}); //done to handle the state of products with no colors
         }
     }, [product]);
 
