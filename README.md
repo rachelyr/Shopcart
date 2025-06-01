@@ -1,4 +1,4 @@
-# 🛒 MERN Stack E-Commerce Web App
+# 🛒 **Shopcart** - A MERN Stack E-Commerce Web App
 
 A full-featured E-commerce web application built using the **MERN stack** (React, MongoDB, Express, Node.js). This project showcases my full-stack development skills with modern tools and technologies, ideal for real-world E-commerce platforms.
 
