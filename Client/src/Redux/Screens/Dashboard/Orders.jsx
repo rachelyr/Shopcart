@@ -28,9 +28,9 @@ function Orders(){
      }, [error, dispatch]);
 
     //delete all orders
-    const deleteAllOrdersHandler = () => {
-        toast.success('All orders deleted');
-    };
+    // const deleteAllOrdersHandler = () => {
+    //     toast.success('All orders deleted');
+    // };
 
 
     return (
@@ -43,13 +43,13 @@ function Orders(){
             <div className="flex flex-col gap-4">
                 <div className="flex justify-between items-center gap-2">
                     <h2 className="text-xl font-bold">Order History</h2>
-                    {orders?.length > 0 && (
+                    {/* {orders?.length > 0 && (
                         <button
                           onClick={deleteAllOrdersHandler}
                           className="bg-flash font-medium text-white py-2 px-6 rounded">
                             Delete All
                           </button>
-                    )}
+                    )} */}
                 </div>
 
                 {orders?.length === 0 ? (

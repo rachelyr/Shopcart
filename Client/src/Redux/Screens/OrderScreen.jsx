@@ -47,15 +47,15 @@ function OrderScreen(){
     const Totals = [
         {
             name: 'Subtotal',
-            cost: `${order?.subTotalPrice ? order?.subTotalPrice : 0}`,
+            cost: `${order?.subTotalPrice ? order?.subTotalPrice?.toLocaleString('en-IN') : 0}`,
         },
         {
             name: 'Tax',
-            cost: `${order?.taxprice ? order?.taxprice : 0}`,
+            cost: `${order?.taxprice ? order?.taxprice?.toLocaleString('en-IN') : 0}`,
         },
         {
             name: 'Shipping',
-            cost: `${shipping?.shippingCost ? shipping?.shippingCost : 0}`,
+            cost: `${shipping?.shippingCost ? shipping?.shippingCost?.toLocaleString('en-IN') : 0}`,
         },
     ];
 
@@ -199,9 +199,9 @@ function OrderScreen(){
                                             <div className="col-span-6 flex flex-col text-sm gap-2">
                                                 <h3 className="truncate">{product?.name}</h3>
                                                 <h2 className="text-xs text-gray-800">
-                                                    ₹{product?.price} x {product?.qty} = {' '}
+                                                    ₹{product?.price?.toLocaleString('en-IN')} x {product?.qty} = {' '}
                                                     <span className="font-bold">
-                                                        ₹{product?.price * product?.qty}
+                                                        ₹{(product?.price * product?.qty)?.toLocaleString('en-IN')}
                                                     </span>
                                                 </h2>
                                                 <div className="text-xs space-y-2 flex-wrap bg-dryGray p-2 rounded text-gray-800">
@@ -334,7 +334,7 @@ function OrderScreen(){
                                           type="button"
                                           className="px-8 bg-white py-4 font-bold flex-colo text-sm rounded"
                                           >
-                                            ₹{order?.totalPrice}
+                                            ₹{order?.totalPrice?.toLocaleString('en-IN')}
                                           </button>
                                     </div>
                                 </div>
