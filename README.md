@@ -102,6 +102,6 @@ Create a `.env` file in `/server`:
 
 Made with 💙 by **[Rachel Yorke]**  
 📫 rachel.yorke225@example.com  
-🔗 [LinkedIn](linkedin.com/in/rachel-mary-yorke-0a1814254) | [GitHub](https://github.com/rachelyr)
+🔗 [LinkedIn](https://linkedin.com/in/rachel-mary-yorke-0a1814254) | [GitHub](https://github.com/rachelyr)
 
 ---
