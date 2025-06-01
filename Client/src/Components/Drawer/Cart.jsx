@@ -111,7 +111,6 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
         }
     }, [success, dispatch, navigate, order, clearCart]); //may have to remove clear cart from here
 
-    console.log(cartItems);
     return (
         <MainDrawer DrawerOpen={cartDrawerOpen} closeDrawer={closeCartDrawer}>
             <div className='flex flex-col w-full h-full justify-between items-middle bg-white rounded'>
@@ -148,19 +147,27 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
                                             <h3 className='truncate'>{p?.title}</h3>
                                             {(p?.color || p?.size) ? 
                                              <>
-                                             <div className='flex items-center w-8 h-8 p-0.5 cursor-pointer rounded-md border border-gray-400'>
-                                                 {console.log('Color code:', p?.code)}
-                                                <div
-                                                    className='w-full h-full rounded-md'
-                                                    style={{backgroundColor: p?.code}}
-                                                    title={p?.color}
-                                                />        
-                                            </div>
-                                            <p className='text-xs text-gray-500'>
-                                                {p?.size && `Size: ${p?.size}`}
-                                                {p?.size && p?.color && ' | '}
-                                                {p?.color && `Color: ${p?.color}`}
-                                             </p>
+                                                <div className='flex flex-row items-center gap-3'>
+                                                    <div className='items-center w-8 h-8 p-0.5 cursor-pointer rounded-md border border-gray-400'>
+                                                        <div
+                                                            className='w-full h-full rounded-md'
+                                                            style={{ backgroundColor: p?.code }}
+                                                            title={p?.color}
+                                                        />
+                                                    </div>
+                                                    <div className='flex flex-col'>
+                                                        {p?.size && (
+                                                            <p className='text-xs text-gray-500'>
+                                                                Size: {p?.size}
+                                                            </p>
+                                                        )}
+                                                        {p?.color && (
+                                                            <p className='text-xs text-gray-500'>
+                                                                Color: {p?.color}
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                </div>
                                              </>
                                             : 
                                             null }
