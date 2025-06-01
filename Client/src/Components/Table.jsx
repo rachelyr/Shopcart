@@ -72,7 +72,7 @@ function Table ({dashboard, datas}){
                 )}
             </td>
             <td className={`${Text} font-bold text-center`}>
-              ₹{order?.totalPrice}
+              ₹{order?.totalPrice?.toLocaleString('en-IN')}
             </td>
             <td className={`${Text} float-right flex gap-2`}>
               {!dashboard && (
