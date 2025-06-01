@@ -80,6 +80,10 @@ export default function Filter ({button, states, functions, categories, tags}){
                     } else if(data?.name === 'Categories'){
                       setActiveCategory(item?.title);
                     }
+                    window.scrollTo({
+                      top: 0,
+                      behavior: 'smooth'
+                    })
                   }}
                   className="flex items-center gap-3 pb-1 w-full cursor-pointer"
                 >
