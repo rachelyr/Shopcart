@@ -46,38 +46,45 @@ export const getAllPopularProductsAction = () => async (dispatch) => {
 
 //add a product to cart
 export const addToCartAction = (product) => async (dispatch) => {
+    const sizeKey = product.size || 'no-size';
+    const colorKey = product.code || 'no-color';
+    const cartItemId = `${product._id}-${sizeKey}-${colorKey}`;
+    const cartProduct = {
+        ...product,
+        cartItemId: cartItemId
+    };
     //save product to local storage
     var prod= JSON.parse(localStorage.getItem('cart') || "[]");
-    const cartitem= prod.findIndex(item => item._id === product._id);
+    const cartitem= prod.findIndex(item => item.cartItemId === cartItemId);
     if(cartitem >= 0){
         prod[cartitem].quantity+= product.quantity;
     } else{
-        prod.push(product);
+        prod.push(cartProduct);
     }
     localStorage.setItem('cart', JSON.stringify(prod));
-    dispatch({type: Types.CART_ADD_ITEM, payload: product});
+    dispatch({type: Types.CART_ADD_ITEM, payload: cartProduct});
 }
 
 //update a product
-export const updateCartAction = (id, quantity) => async (dispatch) => {
+export const updateCartAction = (cartItemId, quantity) => async (dispatch) => {
     var prod= JSON.parse(localStorage.getItem('cart') || "[]");
     const updatedCart = prod.map(item => {
-        if(item._id === id){
+        if(item.cartItemId === cartItemId){
             return {...item, quantity: quantity};
         }
         return item;
     })
     localStorage.setItem('cart', JSON.stringify(updatedCart));
-    dispatch({type: Types.CART_UPDATE_ITEM, payload: {id, quantity}})
+    dispatch({type: Types.CART_UPDATE_ITEM, payload: {cartItemId, quantity}});
 }
 
 //remove a product to cart
-export const removeFromCartAction = (id) => async (dispatch) => {
+export const removeFromCartAction = (cartItemId) => async (dispatch) => {
     //save product to local storage
     var prod= JSON.parse(localStorage.getItem('cart') || "[]");
-    prod = prod.filter((item) => item._id !== id);
+    prod = prod.filter((item) => item.cartItemId !== cartItemId);
     localStorage.setItem('cart', JSON.stringify(prod));
-    dispatch({type: Types.CART_REMOVE_ITEM, payload: id});
+    dispatch({type: Types.CART_REMOVE_ITEM, payload: cartItemId});
 };
 
 //reset cart

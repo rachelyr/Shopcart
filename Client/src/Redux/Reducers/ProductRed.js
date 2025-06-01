@@ -76,7 +76,7 @@ const cartState= {
 export const CartReducer = (state = cartState, action) => {
     switch(action.type) {
         case Types.CART_ADD_ITEM:
-            const itemIndx= state.cartItems.findIndex(item => item._id === action.payload._id);
+            const itemIndx= state.cartItems.findIndex(item => item.cartItemId === action.payload.cartItemId);
 
             if(itemIndx >= 0){
                 const updatedItems= [...state.cartItems];
@@ -99,7 +99,7 @@ export const CartReducer = (state = cartState, action) => {
             return {
                 ...state,
                 cartItems: state.cartItems.map(item =>
-                    item._id === action.payload.id
+                    item.cartItemId === action.payload.cartItemId
                         ? { ...item, quantity: action.payload.quantity }
                         : item
                 )
@@ -107,7 +107,7 @@ export const CartReducer = (state = cartState, action) => {
         case Types.CART_REMOVE_ITEM:
             return{
                 ...state,
-                cartItems: state.cartItems.filter((x) => x._id !== action.payload),
+                cartItems: state.cartItems.filter((x) => x.cartItemId !== action.payload),
             };
         case Types.CART_RESET:
             return {cartItems: []};
