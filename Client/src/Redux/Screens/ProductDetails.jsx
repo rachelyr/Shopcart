@@ -4,7 +4,6 @@ import { BsShareFill} from 'react-icons/bs';
 import Titles from '../../Components/Titles';
 import { TbListDetails } from 'react-icons/tb';
 import Products from '../../Components/Products';
-// import ShareMovieModal from '../../Components/Modals/ShareMovieModal' //yet to be coded
 import {toast, Toaster} from 'react-hot-toast';
 import { ColorRadio, ProductImages, QuantityRadio, SizeRadio } from '../../Components/DetailRadio';
 import { useParams} from 'react-router-dom';
@@ -16,7 +15,7 @@ import { CardLoader, Loader } from "../../Components/Notifications/Loader";
 
 function ProductDetails() {
     const [modalOpen, setModalOpen] = useState(false);
-    const [size, setSize] = useState({});
+    const [size, setSize] = useState(''); //state was expecting an object so i had to change it
     const [colors, setColors] = useState({});
     const [quantity, setQuantity] = useState(1);
     const {id} = useParams();
@@ -27,13 +26,16 @@ function ProductDetails() {
 
     //add to cart
     const addToCart = (data) => {
-        //checks if the product is already in the cart
-        //const exist = cartItems.find((item) => item?._id === data?._id);
+        const selectedSize = size || 'no-size';
+        const selectedColorCode = colors?.code || 'no-color';
+        const cartItemId = `${data._id}-${selectedSize}-${selectedColorCode}`;
             dispatch(
                 addToCartAction({
                     ...data,
-                    size: size?.value,
-                    color: `${colors?.title}, code: ${colors?.value}`,
+                    cartItemId: cartItemId,
+                    size: size || null,
+                    color: colors?.name || null,
+                    code: colors?.value || null,
                     quantity: quantity
             })
         );
@@ -49,6 +51,19 @@ function ProductDetails() {
         }
     }, [dispatch, id]);
 
+    //to set initial color
+    useEffect(() => {
+        if(product?.colors && product.colors.length > 0){
+            const firstColor = product.colors[0];
+            setColors({
+                name: firstColor.colorName,
+                value: firstColor.code,
+                _id: firstColor._id,
+                images: firstColor.image || []
+            })
+        }
+    }, [product]);
+
     //error handling
     useEffect(() => {
         if(error){
@@ -61,14 +76,6 @@ function ProductDetails() {
     return(
         <Layout header={true}>
             <div><Toaster/></div>
-            {/* {modalOpen && (
-                <ShareMovieModal
-                modalOpen={modalOpen}
-                setModalOpen = {setModalOpen}
-                card={product}
-                />
-            )} */}
-
             {
                 loading ? (
                     <div className="min-h-screen container mx-auto px-2 flex-col">
@@ -81,8 +88,8 @@ function ProductDetails() {
                 ): product?.createdAt ? (
                     <div className="min-h-screen containermx-auto px-2 sm:px-4 xl:px-32 my-8 sm:my-12">
                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-2 items-start">
-                    <div className="p-2 lg:sticky top-28 ">
-                        <ProductImages images={product?.images}/>
+                    <div className="p-2 lg:sticky top-28">
+                        <ProductImages selected={colors}/>
                     </div>
                     <div className="w-full flex gap-4 flex-col px-5 md:px-8 text-left">
                         <div className="block">
@@ -90,17 +97,14 @@ function ProductDetails() {
                                 {product?.title}
                             </h1>
                         </div>
-                        <p className="text-sm leading-6 text-gray-500 md:leading-6">
-                            {product?.description}
-                        </p>
                         <h1 className="text-heading text-lg md:text-xl lg:text-2xl font-semibold">
-                            ₹{product?.price}
+                            ₹{product?.price?.toLocaleString('en-IN')}
                         </h1>
 
                         <div className="space-v-8">
                             <ColorRadio selected={colors} setSelected={setColors}/>
                             <SizeRadio selected={size} setSelected={setSize}/>
-                            {product?.stock > 0 &&(
+                                {product?.stock > 0 &&(
                                 <div className="mt-4">
                                     <QuantityRadio
                                     quantity={quantity}
@@ -113,13 +117,16 @@ function ProductDetails() {
                                 </div>
                             )}
                         </div>
+                        <p className="text-sm leading-6 text-gray-500 md:leading-6">
+                            {product?.description}
+                        </p>
 
                         <div className="grid mt-4 2xl:grid-cols-7 sm:grid-cols-2 lg:grid-cols-1 gap-3 items-center">
                             { product?.stock > 0 ? (
                                 <button
-                                disabled={!size?.title || !colors?.title || !quantity}
+                                disabled={!quantity || (product.size?.length > 0 && !size)}
                                 onClick={() => addToCart(product)}
-                                className="2xl:col-span-6 disabled:bg-orange-300 transitions bg-subMain p-4 rounded">
+                                className="2xl:col-span-6 disabled:bg-orange-300 transitions bg-subMain p-4 rounded disabled:cursor-not-allowed">
                                     Add to Cart
                                 </button>
                             ): (
@@ -130,7 +137,7 @@ function ProductDetails() {
 
                             <button
                             onClick={() => setModalOpen(true)}
-                            className="border-[.5px] border-main bg-deepest 2xl:py-5 py-8 px-7 rounded-md flex-col">
+                            className="border-[.5px] border-main bg-deepest 2xl:py-5 py-5 px-7 rounded-md flex flex-col justify-center items-center">
                                 <BsShareFill/>
                             </button>
                         </div>
