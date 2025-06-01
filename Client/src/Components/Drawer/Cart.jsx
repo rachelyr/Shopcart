@@ -20,7 +20,6 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
     const {userInfo} = useSelector((state) => state.userLogin);
     const {loading: orderLoading, success, order, error: orderError } = useSelector((state) => state.createOrder);
 
-    // const [quantity, setQuantity] = useState(1);
 
     const totalPrice = cartItems?.reduce(
         (acc, item) => acc + item.price * item.quantity, 0
@@ -53,6 +52,22 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
         },
     ];
 
+    //handle cart item image
+    const getCartImage= (cartItem) => {
+        if(cartItem?.color && cartItem?.code){
+            const match = cartItem.colors?.find(color => 
+                color.colorName === cartItem.color || color.code === cartItem.code
+            );
+            if(match?.image?.length > 0){
+                return match.image[0];
+            }
+        }
+        if(cartItem.images?.length > 0) {
+            return cartItem.images[0];
+        }
+        return null; //final fallback
+    }
+
     //place order
     const placeOrderHandler = () =>{
         if (!userInfo){
@@ -66,7 +81,7 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
                         product: item?._id,
                         qty: item?.quantity,
                         name: item?.title,
-                        image: item?.images[0],
+                        image: getCartImage(item),
                         price: item?.price,
                         color: item?.color,
                         size: item?.size
@@ -96,7 +111,7 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
         }
     }, [success, dispatch, navigate, order, clearCart]); //may have to remove clear cart from here
 
-
+    console.log(cartItems);
     return (
         <MainDrawer DrawerOpen={cartDrawerOpen} closeDrawer={closeCartDrawer}>
             <div className='flex flex-col w-full h-full justify-between items-middle bg-white rounded'>
@@ -120,26 +135,44 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
                             <div>
                                 {cartItems?.map((p) => (
                                     <div
-                                      key={p?._id}
+                                      key={p?.cartItemId}
                                       className='grid grid-cols-6 gap-2 my-6 items-center'>
                                         <Link
                                           to={`/card/${p._id}`}
-                                          className='col-span-2 bg-deepGray rounded p-2 h-24 border border-deepest'>
+                                          className='col-span-2 bg-deepGray rounded p-2 h-30 border border-deepest'>
                                             <img alt={p?.title}
-                                                 src={p?.images[0]}
+                                                 src={getCartImage(p)}
                                                  className='w-full h-full object-cover rounded'/>
                                           </Link>
                                           <div className='col-span-3 flex flex-col text-sm gap-2'>
                                             <h3 className='truncate'>{p?.title}</h3>
+                                            {(p?.color || p?.size) ? 
+                                             <>
+                                             <div className='flex items-center w-8 h-8 p-0.5 cursor-pointer rounded-md border border-gray-400'>
+                                                 {console.log('Color code:', p?.code)}
+                                                <div
+                                                    className='w-full h-full rounded-md'
+                                                    style={{backgroundColor: p?.code}}
+                                                    title={p?.color}
+                                                />        
+                                            </div>
+                                            <p className='text-xs text-gray-500'>
+                                                {p?.size && `Size: ${p?.size}`}
+                                                {p?.size && p?.color && ' | '}
+                                                {p?.color && `Color: ${p?.color}`}
+                                             </p>
+                                             </>
+                                            : 
+                                            null }
                                             <CartQuantityRadio
                                                 quantity={p?.quantity}
-                                                updateQty={(newQuantity) => updateQuantity(p?._id, newQuantity)}
+                                                updateQty={(newQuantity) => updateQuantity(p?.cartItemId, newQuantity)}
                                                 stock={p?.stock}
                                             />
                                           </div>
                                           <div className='col-span-1 flex-col'>
                                             <button
-                                               onClick={() => deleteProductFromCart(p?._id)}
+                                               onClick={() => deleteProductFromCart(p?.cartItemId)}
                                                className='flex-col p-2 text-lg bg-flash rounded text-white'>
                                                 <MdDelete className='text-lg'/>
                                                </button>
