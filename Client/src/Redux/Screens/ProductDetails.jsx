@@ -22,7 +22,7 @@ function ProductDetails() {
     const dispatch = useDispatch();
 
     const {loading, error, product, related} = useSelector((state) => state.singleProduct);
-    const {cartItems} = useSelector((state) => state.cart);
+    //const {cartItems} = useSelector((state) => state.cart);
 
     //add to cart
     const addToCart = (data) => {

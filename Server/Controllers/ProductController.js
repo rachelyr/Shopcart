@@ -144,7 +144,6 @@ const updateProduct = expressAsyncHandler(async (req, res) => {
         const product= await Products.findById(req.params.id);
 
         if(product){
-            console.log('previous product:', product);
             product.title = title || product.title; // "||" this is making sure that the values are not empty or undefined
             product.price = price || product.price;
             product.images = images || product.images;
