@@ -2,8 +2,14 @@ import mongoose from "mongoose";
 
 const ProductsSchema = new mongoose.Schema({
     title:{type:String, required:true},
-    images:[{type:String}],
     price:{type:Number, required:true},
+    images:[{type:String, required:true}],
+    colors: [{ 
+        colorName: {type:String},
+        code: {type:String},
+        image:[{type:String}]
+    }],
+    size: [{type:String}],
     description:{type:String, required:true},
     category:{
         type:mongoose.Schema.Types.ObjectId,

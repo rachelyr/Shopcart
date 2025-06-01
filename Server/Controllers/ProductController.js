@@ -26,12 +26,14 @@ const importProducts = expressAsyncHandler(async (req, res) => {
 
 const createProduct = expressAsyncHandler(async (req, res) => {
     try{
-        const{ title, price, description, image, tags, category, salesOffer, stock } = req.body;
+        const{ title, price, images, colors, size, description, tags, category, salesOffer, stock } = req.body;
         const product = new Products({
             title,
             price,
+            images,
+            colors,
+            size,
             description,
-            image,
             tags,
             category,
             salesOffer,
@@ -57,8 +59,8 @@ const getProductById = expressAsyncHandler(async (req, res) => {
         if(product) {
             //get related products
             const relatedProducts = await Products.find({category: product.category,
-                _id: {$ne: product._id}})   //this does'nt include ethe product itself
-                .limit(4);
+                _id: {$ne: product._id}})   //this does'nt include the product itself
+                .limit(8); //changed to 8 from 4
             res.json({product, relatedProducts});
         } else{
             res.status(404).json({ message: "Product not found" });
@@ -78,7 +80,7 @@ const getProducts = expressAsyncHandler(async (req, res) => {
         //we start creating the sorting functionality for the front end
         const{ category, search, sort, tag } = req.query; //from .body changed to .query
 
-        const pageSize = 10; // the server will return 10 products per page
+        const pageSize = 12; // the server will return 10 products per page
         const pageNumber= Number(req.query.pageNumber) || 1; //if no page number is provided it'll give 1
 
         //sort newest to oldest or oldest to newest
@@ -137,15 +139,18 @@ const getProducts = expressAsyncHandler(async (req, res) => {
 
 const updateProduct = expressAsyncHandler(async (req, res) => {
     try{
-        const { title, price, description, images, tags, category, salesOffer, stock } = req.body;
+        const { title, price, images, colors, size, description, tags, category, salesOffer, stock } = req.body;
 
         const product= await Products.findById(req.params.id);
 
         if(product){
+            console.log('previous product:', product);
             product.title = title || product.title; // "||" this is making sure that the values are not empty or undefined
             product.price = price || product.price;
-            product.description = description || product.description;
             product.images = images || product.images;
+            product.colors = colors || product.colors;
+            product.size = size || product.size;
+            product.description = description || product.description;
             product.tags = tags || product.tags;
             product.category = category || product.category;
             product.salesOffer = salesOffer || product.salesOffer;
@@ -195,7 +200,7 @@ const getTags = expressAsyncHandler(async (req, res) => {
             ]);
 
         //send tags to client
-            res.json(tags);
+        res.json(tags);
 });
 
 
