@@ -204,16 +204,22 @@ function OrderScreen(){
                                                         ₹{(product?.price * product?.qty)?.toLocaleString('en-IN')}
                                                     </span>
                                                 </h2>
-                                                <div className="text-xs space-y-2 flex-wrap bg-dryGray p-2 rounded text-gray-800">
-                                                    <p>
-                                                        <span className="font-medium">Color: </span>
+                                                {(product?.color || product?.size) && (
+                                                    <div className="text-xs space-y-2 flex-wrap bg-dryGray p-2 rounded text-gray-800">
+                                                    {product?.color && (
+                                                        <p>
+                                                            <span className="font-medium">Color: </span>
                                                             {product?.color}
-                                                    </p>
-                                                    <p>
-                                                        <span className="font-medium">Size: </span>
+                                                        </p>
+                                                    )}
+                                                    {product?.size && (
+                                                        <p>
+                                                            <span className="font-medium">Size: </span>
                                                             {product?.size}
-                                                    </p>
+                                                        </p>
+                                                    )}
                                                 </div>
+                                                )}
                                             </div>
                                           </Link>
                                     ))}

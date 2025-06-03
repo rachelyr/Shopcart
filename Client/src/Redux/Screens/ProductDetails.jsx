@@ -157,7 +157,7 @@ function ProductDetails() {
 
                 <div className="lg:mt-24 mt-12">
                     <Titles title='You might also like' Icon={TbListDetails}/>
-                    <div className="grid mt-6 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+                    <div className="grid mt-6 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 grid-cols-2 gap-4">
                         {loading || related?.length === 0
                         ? ( Array.from(Array(3).keys()).map((i) =>(
                                 <CardLoader key={i}/>

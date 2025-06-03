@@ -19,7 +19,6 @@ function Dashboard() {
     //states
      const {loading, orders, total, pending, completed, cancelled, error} = useSelector((state) => state.getAllOrders);
 
-     //console.log('orders: ', orders);
      //get all orders
      useEffect(() => {
         dispatch(getAllOrdersAction());

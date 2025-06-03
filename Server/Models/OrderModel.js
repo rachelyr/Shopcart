@@ -8,10 +8,10 @@ const OrderSchema = new mongoose.Schema({
     },
     orderItems:[
         {
-            size: { type: String, required: false },
+            size: { type: String},
             qty: { type: Number, required: true },
             name: { type: String, required: true },
-            color: { type: String, required: true },
+            color: { type: String},
             image: { type: String, required: true },
             price: { type: Number, required: true },
             product: {

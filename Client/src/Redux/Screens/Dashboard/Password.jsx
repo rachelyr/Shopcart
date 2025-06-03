@@ -6,6 +6,7 @@ import {updatePasswordSchema} from '../../../Components/Validation';
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import { changePasswordAction } from "../../Actions/UserAction";
+import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
 
 
 const Password = () => {
@@ -92,9 +93,6 @@ const Password = () => {
             <button
               type="submit"
               disabled={loading}
-              onClick={() => {
-                console.log('Button clicked!');
-              }}
               className="bg-main sm:w-auto w-full font-medium text-white py-3 px-6 rounded disabled:opacity-50"
             >
               {loading ? "Loading..." : "Change Password"}

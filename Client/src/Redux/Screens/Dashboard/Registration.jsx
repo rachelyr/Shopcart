@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Layout from "../../../layout/Layout";
-// import BigLoader from "../../../Components/Notifications/BigLoader";
 
 import { useForm } from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -10,7 +9,7 @@ import {useNavigate, useLocation} from "react-router-dom";
 import { loginAction, registerAction } from "../../Actions/UserAction";
 import {BiLoaderCircle, BiLogInCircle} from "react-icons/bi";
 import { Input } from "@headlessui/react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import logo from "../../../images/logo.png";
 
 function Registration() {
@@ -24,7 +23,6 @@ function Registration() {
     const {loading, userInfo, error} = useSelector((state) => state.userLogin);
     const {loading: regLoading, error: regError} = useSelector((state) => state.userRegister);
 
-    console.log(userInfo)
     //validate user
     const {
         register,
@@ -36,13 +34,11 @@ function Registration() {
     });
 
     const handleSubmitLogin = (data) => {
-        console.log('login')
         dispatch(loginAction(data));
         reset();
     };
 
     const handleSubmitRegistration= (data) => {
-        console.log('im the sign up handler')
         dispatch(registerAction(data));
         reset();
     };
@@ -62,6 +58,7 @@ useEffect(() => {
 
   return(
     <Layout header= {true}>
+      <Toaster/>
         <div className= 'bg-gray-200'>
             <div className= 'min-h-screen mx-auto xl:px-32 px-4 lg:py-36 py-12 flex items-center flex-col'>
                 <div className="sticky xl:w-4/5 flex-col gap-4 rounded-md top-28 col-span-4 bg-white ">

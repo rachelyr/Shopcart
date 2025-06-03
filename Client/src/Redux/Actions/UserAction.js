@@ -7,7 +7,6 @@ import { ErrorAction, tokenProtection } from '../Screens/Protection';
 //login user action
 
 const loginAction = (user) => async (dispatch) => {
-    console.log('login action called with: ', user);
     try{
         dispatch({type: Types.USER_LOGIN_REQUEST});
         const data= await Apis.loginService(user);
@@ -71,7 +70,6 @@ const changePasswordAction= (passwords) => async (dispatch, getState) =>{
         dispatch({type: Types.PASSWORD_UPDATE_REQUEST});
         await Apis.changePasswordService(passwords, tokenProtection(getState));
         dispatch({type: Types.PASSWORD_UPDATE_SUCCESS});
-        toast.success('Password Changed!');
     } catch(error){
         ErrorAction(error, dispatch, Types.PASSWORD_UPDATE_FAILED);
     }

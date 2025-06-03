@@ -31,7 +31,6 @@ function UpdateProfile() {
 
     //update user
     const handlerSubmit= (data) => {
-        console.log(data);
         dispatch(
             updateProfileAction({
                 ...data,

@@ -44,7 +44,7 @@ function MobileDrawer({mobileDrawerOpen, toggleMobileDrawer})  {
             icon: BiHomeAlt
         },
         {
-            link: '/about-us',
+            link: '/',
             name: 'About Us',
             icon: HiOutlineUserGroup,
         },
@@ -54,22 +54,22 @@ function MobileDrawer({mobileDrawerOpen, toggleMobileDrawer})  {
             icon: FiShoppingBag,
         },
         {
-            link: '/contact-us',
+            link: '/',
             name: 'Contact Us',
             icon: BiPhoneCall,
         },
         {
-            link: '/faq',
+            link: '/',
             name: 'FAQ',
             icon: BiHelpCircle,
         },
         {
-            link: '/policy',
+            link: '/',
             name: 'Privacy Policy',
             icon: MdSecurity,
         },
         {
-            link: '/terms-condition',
+            link: '/',
             name: 'Terms and Conditions',
             icon: BsFileEarmarkMedical,
         },

@@ -10,9 +10,7 @@ import expressAsyncHandler from "express-async-handler";
 const createOrder = expressAsyncHandler(async (req, res) => {
     try{
         const { orderItems, subTotalPrice, totalPrice } = req.body;
-        // const delivery = {subTotalPrice, totalPrice}; // had to do this for validation
 
-        console.log("🟡 Received order data:", req.body); // Debugging log
         // Create the order with the correct structure for delivery
         const order = new Order({
             orderItems,

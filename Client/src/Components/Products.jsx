@@ -24,7 +24,7 @@ function Products({product}) {
                         )}
                     </div>
             </Link>
-            <h3 className="px-1 text-sm md:text-[16px] mt-2">{product.title}</h3>
+            <h3 className="px-1 text-sm md:text-[16px] mt-2 truncate">{product.title}</h3>
             <div className="px-1 flex flex-row">
                 <h2 className="text-md font-bold ">₹{product.price?.toLocaleString('en-IN')}</h2>
                 {product?.salesOffer?.status &&(

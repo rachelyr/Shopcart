@@ -48,7 +48,7 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
         },
         {
             title: 'Total',
-            value: `Rs. ${totalPrice}`
+            value: `Rs. ${totalPrice?.toLocaleString('en-IN')}`
         },
     ];
 
@@ -83,8 +83,8 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
                         name: item?.title,
                         image: getCartImage(item),
                         price: item?.price,
-                        color: item?.color,
-                        size: item?.size
+                        color: item?.color || '', 
+                        size: item?.size || ''
                     };
                 }),
                 totalPrice: totalPrice,
@@ -148,13 +148,15 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
                                             {(p?.color || p?.size) ? 
                                              <>
                                                 <div className='flex flex-row items-center gap-3'>
-                                                    <div className='items-center w-8 h-8 p-0.5 cursor-pointer rounded-md border border-gray-400'>
-                                                        <div
-                                                            className='w-full h-full rounded-md'
-                                                            style={{ backgroundColor: p?.code }}
-                                                            title={p?.color}
-                                                        />
-                                                    </div>
+                                                   {p?.color && (
+                                                            <div className='items-center w-8 h-8 p-0.5 cursor-pointer rounded-md border border-gray-400'>
+                                                                <div
+                                                                    className='w-full h-full rounded-md'
+                                                                    style={{ backgroundColor: p?.code }}
+                                                                    title={p?.color}
+                                                                />
+                                                            </div>
+                                                        )}
                                                     <div className='flex flex-col'>
                                                         {p?.size && (
                                                             <p className='text-xs text-gray-500'>
