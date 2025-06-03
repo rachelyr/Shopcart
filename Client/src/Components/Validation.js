@@ -50,16 +50,6 @@ export const updateProfileSchema = yup.object().shape({
 });
 
 export const updatePasswordSchema = yup.object().shape({
-   password: yup.string()
-      .min(6, 'Password must be at least 6 characters')
-      .required('Required')
-      .max(20, 'Password should be of 20 characters maximum')
-      .matches(/^\S*$/, 'Whitespace is not allowed'),
-   confirmPassword: yup.string()
-      .min(6, 'Password must be at least 6 characters')
-      .required('Required')
-      .max(20, 'Password should be of 20 characters maximum')
-      .matches(/^\S*$/, 'Whitespace is not allowed'),
    oldPassword: yup.string()
       .min(6, 'Password must be at least 6 characters')
       .required('Required')
@@ -70,4 +60,10 @@ export const updatePasswordSchema = yup.object().shape({
       .required('Required')
       .max(20, 'Password should be of 20 characters maximum')
       .matches(/^\S*$/, 'Whitespace is not allowed'),
+   confirmPassword: yup.string()
+      .min(6, 'Password must be at least 6 characters')
+      .required('Required')
+      .oneOf([yup.ref('newPassword'), null], 'Passwords must match')
+      .max(20, 'Password should be of 20 characters maximum')
+      .matches(/^\S*$/, 'Whitespace is not allowed')
 });

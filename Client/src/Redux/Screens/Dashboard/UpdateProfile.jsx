@@ -5,7 +5,7 @@ import {updateProfileSchema} from '../../../Components/Validation';
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { deleteUserAction, updateProfileAction } from '../../Actions/UserAction';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from './Sidebar';
 import Uploader from '../../../Components/Uploader';
 
@@ -75,6 +75,7 @@ function UpdateProfile() {
 
     return (
       <Sidebar>
+        <Toaster/>
         <div className="flex flex-col gap-4">
           <h2 className="text-xl font-bold">Profile</h2>
           <Uploader image={image} setImage={setImage} />
