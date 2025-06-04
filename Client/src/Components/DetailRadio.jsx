@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
 import {RadioGroup, Radio} from '@headlessui/react';
-import {productdetailsData} from '../Data/FilterData';
 import {FreeMode, Navigation, Thumbs} from 'swiper/modules';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import { Zoom } from "swiper/modules";

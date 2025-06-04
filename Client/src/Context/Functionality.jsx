@@ -1,4 +1,3 @@
-import React from "react";
 
 export const dateFormat = (dateString) => {
     if (!dateString) return 'N/A';  // Handle missing dates

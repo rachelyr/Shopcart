@@ -5,16 +5,15 @@ import {FaShareAlt} from 'react-icons/fa';
 import {BsCaretLeftFill, BsCaretRightFill, BsFillEyeFill} from 'react-icons/bs';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation, Autoplay} from 'swiper/modules';
-// import ShareMovieModal from "../Modals/ShareMovieModal";  //need to be created
 import { useNavigate } from "react-router-dom";
 import {OfferLoader} from "../Notifications/Loader";
 
 
 function FlashDeal({datas, loading}){
-    const [modalOpen, setModalOpen] = useState(false);
+    // const [modalOpen, setModalOpen] = useState(false);
     const [prevEl, setPrevEl] = useState(null);
     const [nextEl, setNextEl] = useState(null);
-    const [card, setCard] =useState(null);
+    // const [card, setCard] =useState(null);
     const navigate = useNavigate();
 
    // const classNames = 'hover:bg-main transitions hover:text-white rounded-full w-10 h-10 flex-col flex bg-subMain text-white'
@@ -37,8 +36,8 @@ function FlashDeal({datas, loading}){
                 return <FaShareAlt/>;
             },
             onClick: (f) => {
-                setCard(f);
-                setModalOpen(!modalOpen);
+                // setCard(f);
+                // setModalOpen(!modalOpen);
             },
         },
     ];

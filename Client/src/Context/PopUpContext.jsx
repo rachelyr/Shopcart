@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useState } from "react";
+import React, { createContext, useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const SidebarContext = createContext();
@@ -11,23 +11,23 @@ export const PopUpProvider = ({children}) => {
     const [searchValue, setSearchValue] = useState('');
     const navigate = useNavigate();
 
-    const submitHandler = (e) => {
+    const submitHandler = useCallback((e) => {
         e.preventDefault();
         if(search) {
             navigate(`/shop?search=${search}`);
             setSearchValue(search);
             setSearch('');
         }
-    };
+    }, [navigate, search]);
 
-    const toggleCartDrawer = () => setCartDrawerOpen(!cartDrawerOpen);
-    const closeCartDrawer = () => setCartDrawerOpen(false);
+    const toggleCartDrawer = useCallback(() => {setCartDrawerOpen(prev => !prev)}, []);
+    const closeCartDrawer = useCallback(() => {setCartDrawerOpen(false)}, []);
 
-    const toggleMobileDrawer = () => setMobileDrawerOpen(!mobileDrawerOpen);
-    const closeMobileDrawer = () => setMobileDrawerOpen(false);
+    const toggleMobileDrawer = useCallback(() => {setMobileDrawerOpen(prev => !prev)}, []);
+    const closeMobileDrawer = useCallback(() => setMobileDrawerOpen(false), []);
 
-    const toggleMobileFilter = () => setMobileFilterOpen(!mobileFilterOpen);
-    const closeMobileFilter = () => setMobileFilterOpen(false);
+    const toggleMobileFilter = useCallback(() => {setMobileFilterOpen(prev => !prev)}, []);
+    const closeMobileFilter = useCallback(() => {setMobileFilterOpen(false)}, []);
 
     const value = useMemo(
         () => ({
@@ -47,7 +47,7 @@ export const PopUpProvider = ({children}) => {
             setSearchValue
         }),
 
-        [cartDrawerOpen, mobileDrawerOpen, mobileFilterOpen, search, searchValue]
+        [cartDrawerOpen, mobileDrawerOpen, mobileFilterOpen, search, searchValue, closeCartDrawer, closeMobileDrawer, closeMobileFilter, submitHandler, toggleCartDrawer, toggleMobileDrawer, toggleMobileFilter]
     );
 
     return (

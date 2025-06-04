@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback} from 'react';
 import { IoClose } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import MainDrawer from './MainDrawer';
@@ -26,10 +26,10 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
     );
 
     //clear cart
-    const clearCart = () => {
-        dispatch(resetCartAction())
+    const clearCart = useCallback(() => {
+        dispatch(resetCartAction());
         closeCartDrawer();
-    };
+    }, [dispatch, closeCartDrawer]);
 
     //removes a product from the cart
     const deleteProductFromCart = (id) => {
@@ -109,7 +109,7 @@ function Cart({cartDrawerOpen, closeCartDrawer }) {
             dispatch({type: 'ORDER_CREATE_RESET' });
             clearCart();
         }
-    }, [success, dispatch, navigate, order, clearCart]); //may have to remove clear cart from here
+    }, [success, dispatch, navigate, order, clearCart]);
 
     return (
         <MainDrawer DrawerOpen={cartDrawerOpen} closeDrawer={closeCartDrawer}>
