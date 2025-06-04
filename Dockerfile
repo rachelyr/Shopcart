@@ -4,11 +4,11 @@ ENV PORT=5000
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY Server/package*.json ./
 
 RUN npm install --production
 
-COPY . .
+COPY Server/. .
 
 EXPOSE 5000
 
