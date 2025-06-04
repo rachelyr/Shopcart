@@ -143,10 +143,10 @@ function OrderScreen(){
 
     return(
         <Layout header={true}>
-            <div className="bg-deepGray">
+            <div className="bg-deepGray min-h-screen flex items-center justify-center">
                 {
                     loading ? (
-                        <div className="flex-col flex container mx-auto min-h-screen">
+                        <div className="flex flex-col justify-center items-center">
                             <Loader/>
                         </div>
                     )
@@ -397,7 +397,7 @@ function OrderScreen(){
                 </div>
                     )
                 : (
-                <div className="flex-colo conatiner mx-auto min-h-screen">
+                <div className="flex flex-col conatiner mx-auto min-h-screen">
                     <Empty text="No Order Found"/>
                 </div>
                 )}

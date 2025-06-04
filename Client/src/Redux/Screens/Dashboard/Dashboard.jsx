@@ -68,9 +68,11 @@ function Dashboard() {
         <SideBar>
             {
                 loading ? (
-                    <div className="flex-col justify-center items-center flex h-96">
-                        <Loader/>
-                    </div>
+                    <main className="flex justify-center items-center">
+                        <div className="flex-col justify-center items-center flex h-96">
+                            <Loader/>
+                        </div>
+                    </main>
                 ) :
                 (
                 <div className="flex flex-col gap-4">

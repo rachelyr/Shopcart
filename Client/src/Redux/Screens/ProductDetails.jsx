@@ -80,15 +80,17 @@ function ProductDetails() {
             <div><Toaster/></div>
             {
                 loading ? (
-                    <div className="min-h-screen container mx-auto px-2 flex-col">
-                        <Loader/>
-                    </div>
+                    <main className="flex min-h-screen justify-center items-center">
+                        <div className="flex flex-col justify-center items-center">
+                            <Loader />
+                        </div>
+                    </main>
                 ) : error ? (
                     <div className="min-h-screen container mx-auto flex-col">
                         <Empty text={'Product not Found'}/>
                     </div>
                 ): product?.createdAt ? (
-                    <div className="min-h-screen containermx-auto px-2 sm:px-4 xl:px-32 my-8 sm:my-12">
+                    <div className="min-h-screen container mx-auto px-2 sm:px-4 xl:px-32 my-8 sm:my-12">
                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-2 items-start">
                     <div className="p-2 lg:sticky top-28">
                         <ProductImages selected={colors}/>
