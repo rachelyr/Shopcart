@@ -57,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@svgr/plugin-svgo": "^8.1.0",
     "@tailwindcss/typography": "^0.5.16",
     "autoprefixer": "^10.4.20",

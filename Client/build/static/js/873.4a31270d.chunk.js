@@ -1,1 +1,0 @@
-(self.webpackChunkshopcart=self.webpackChunkshopcart||[]).push([[873],{873:()=>{}}]);

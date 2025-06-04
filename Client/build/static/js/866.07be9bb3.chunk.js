@@ -1,1 +1,0 @@
-(self.webpackChunkshopcart=self.webpackChunkshopcart||[]).push([[866],{3866:()=>{}}]);
