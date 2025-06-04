@@ -2,11 +2,7 @@ import axios from "axios";
 
 //PUBLIC API
 
-//get all products
-// const getAllProducts = async ({pageNumber, category, search, sort, tag}) => {
-//     const {data} = await axios.get(`http://localhost:5000/api/products?pageNumber=${pageNumber}&category=${category}&search=${search}&sort=${sort}&tag=${tag}`);
-//     return data;
-// };
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const getAllProducts = async ({pageNumber, category, search, sort, tag}) => {
     // Using template literals but ensuring values aren't undefined
@@ -17,20 +13,20 @@ const getAllProducts = async ({pageNumber, category, search, sort, tag}) => {
     tag = tag || '';
 
     const {data} = await axios.get(
-        `http://localhost:5000/api/products?pageNumber=${pageNumber}&category=${category}&search=${search}&sort=${sort}&tag=${tag}`
+        `${API_BASE_URL}/api/products?pageNumber=${pageNumber}&category=${category}&search=${search}&sort=${sort}&tag=${tag}`
     );
     return data;
 };
 
 //get a single product
 const getSingleProduct = async (id) =>{
-    const {data} = await axios.get(`http://localhost:5000/api/products/${id}`);
+    const {data} = await axios.get(`${API_BASE_URL}/api/products/${id}`);
     return data;
 };
 
 //get all popular products
 const getAllPopularProd = async () => {
-    const {data} = await axios.get(`http://localhost:5000/api/products/all/tags`);
+    const {data} = await axios.get(`${API_BASE_URL}/api/products/all/tags`);
     return data;
 };
 
