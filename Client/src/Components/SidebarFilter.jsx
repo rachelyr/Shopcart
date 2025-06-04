@@ -141,13 +141,44 @@ const SidebarFilter = ({ category }) => {
         </div>
         <div className="lg:col-span-10 col-span-12">
           <div className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-2 gap-3">
-            {loading || products?.length === 0
-              ? Array.from(Array(6).keys()).map((p, i) => (
-                  <CardLoader key={i} />
-                ))
-              : products?.map((p) => (
+            {loading ? (
+              // Show loaders only when actually loading
+              Array.from(Array(6).keys()).map((p, i) => (
+                <CardLoader key={i} />
+              ))
+            ) : products?.length === 0 ? (
+              <div className="col-span-full flex flex-col items-center justify-center py-16 px-4">
+                <div className="text-center max-w-md">
+                  <div className="mb-6">
+                    <img
+                      src="https://res.cloudinary.com/dcqjcnz6u/image/upload/v1749058744/Empty-pana_aexqjp.svg"
+                      alt="No products found"
+                      className="w-24 h-24 mx-auto opacity-60"
+                    />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    No products found
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    We couldn't find any products matching your current filters.
+                    Try adjusting your search criteria or browse our popular items.
+                  </p>
+                    <div className="space-y-3">
+                      {/* <button
+                        onClick={() => clearFilters()}
+                        className="w-full bg-main text-white py-3 px-6 rounded-lg font-semibold hover:bg-opacity-90 transition-colors"
+                      >
+                        Clear All Filters
+                      </button> */}
+                    </div>
+                </div>
+              </div>
+              )
+              : 
+                products?.map((p) => (
                   <Products bg={true} key={p._id} product={p} />
-                ))}
+                ))
+              }
           </div>
 
           {pages > 1 && (
