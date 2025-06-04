@@ -1,6 +1,6 @@
 import * as Types from '../Constants/AllConstants';
 import * as Apis from '../API/CategoryApi';
-import {ErrorAction, tokenProtection} from '../Screens/Protection';
+import {ErrorAction} from '../Screens/Protection';
 
 
 //get all categories action

@@ -6,7 +6,6 @@ import {updatePasswordSchema} from '../../../Components/Validation';
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import { changePasswordAction } from "../../Actions/UserAction";
-import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
 
 
 const Password = () => {

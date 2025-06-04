@@ -14,7 +14,7 @@ import { CardLoader, Loader } from "../../Components/Notifications/Loader";
 
 
 function ProductDetails() {
-    const [modalOpen, setModalOpen] = useState(false);
+    // const [modalOpen, setModalOpen] = useState(false);
     const [size, setSize] = useState(''); //state was expecting an object so i had to change it
     const [colors, setColors] = useState({});
     const [quantity, setQuantity] = useState(1);
@@ -140,7 +140,6 @@ function ProductDetails() {
                             )}
 
                             <button
-                            onClick={() => setModalOpen(true)}
                             className="border-[.5px] border-main bg-deepest 2xl:py-5 py-5 px-7 rounded-md flex flex-col justify-center items-center">
                                 <BsShareFill/>
                             </button>

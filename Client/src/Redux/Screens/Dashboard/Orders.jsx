@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Table from "../../../Components/Table";
 import Sidebar from "./Sidebar";
-import {toast, Toaster} from 'react-hot-toast';
+import {toast} from 'react-hot-toast';
 import { Empty } from "../../../Components/Notifications/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersAction } from "../../Actions/OrderAction";
