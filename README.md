@@ -37,7 +37,7 @@ A full-featured E-commerce web application built using the **MERN stack** (React
 
 ## 🌐 Live Demo
 
-[🚀 Deployed Link](#https://shopcarte.netlify.app/) <!-- Replace with your deployed URL if available -->
+[🚀 Deployed Link](https://shopcarte.netlify.app/) <!-- Replace with your deployed URL if available -->
 
 ---
 
