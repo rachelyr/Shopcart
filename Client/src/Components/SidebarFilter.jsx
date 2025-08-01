@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Filter from "./Filter";
 import Products from "./Products";
 import { BiFilter } from "react-icons/bi";
@@ -21,6 +21,7 @@ const SidebarFilter = ({ category }) => {
   const [tag, setTag] = useState({});
   const dispatch = useDispatch();
   const [pageNumber, setPageNumber] = useState(1);
+  const initialRender = useRef(true);
 
   //states
   const { products, loading, error, page, pages } = useSelector(
@@ -30,16 +31,6 @@ const SidebarFilter = ({ category }) => {
     (state) => state.categoriesList
   );
   const { tags, error: tagError } = useSelector((state) => state.tagsProduct);
-
-  const queries = useMemo(() => {
-    const query = {
-      search: searchValue ? searchValue : "",
-      category: categor?.value ? categor?.value : "",
-      sort: published?.value ? published?.value : "",
-      tag: tag?.value ? tag?.value : "",
-    };
-    return query;
-  }, [searchValue, categor, published, tag]);
 
   //get all categories
   useEffect(() => {
@@ -53,16 +44,34 @@ const SidebarFilter = ({ category }) => {
 
   //check categories in url
   useEffect(() => {
-    if (category) {
-      setCategor({ title: category, value: category });
+    if (category && categories && categories.length > 0) {
+      const foundCategory = categories.find(cat => cat._id === category);
+      if (foundCategory) {
+        setCategor({ title: foundCategory.name, value: foundCategory._id });
+      }
     }
-  }, [category]);
+  }, [category, categories]);
 
   // get all products
-  useEffect(() => {
-    dispatch(getAllProductsAction({ ...queries, pageNumber: pageNumber }));
-  }, [dispatch, pageNumber, queries]);
+  // useEffect(() => {
+  //   dispatch(getAllProductsAction({ ...queries, pageNumber: pageNumber }));
+  // }, [dispatch, pageNumber, queries]);
 
+  useEffect(() => {
+    if (initialRender.current && category && !categor?.value) {
+      return;
+    }
+    
+    initialRender.current = false;
+
+  dispatch(getAllProductsAction({ 
+    search: searchValue || "",
+    category: categor?.value || "",
+    sort: published?.value || "",
+    tag: tag?.value || "",
+    pageNumber: pageNumber 
+  }));
+}, [dispatch, pageNumber, searchValue, categor?.value, published?.value, tag?.value, category]);  
 
   //error handeling
   useEffect(() => {
