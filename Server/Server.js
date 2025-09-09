@@ -7,6 +7,7 @@ import { errorHandler } from './middleware/Error.js';
 import CategoryRouter from './Routers/CategoryRouter.js';
 import ProductRouter from './Routers/ProductRouter.js';
 import OrderRouter from './Routers/OrderRouter.js';
+import HealthRouter from './Routers/HealthRouter.js';
 
 dotenv.config();
 const app = express();
@@ -29,6 +30,7 @@ app.use('/api/users', userRouter);
 app.use('/api/categories', CategoryRouter);
 app.use('/api/products', ProductRouter);
 app.use('/api/orders', OrderRouter);
+app.use('/api', HealthRouter);
 
 //error handler - This will ensure that any errors that occur during request processing will be passed
 //to this errorHandler middleware, and it will generate a consistent error response for clients.
